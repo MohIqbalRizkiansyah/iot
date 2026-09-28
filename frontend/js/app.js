@@ -365,8 +365,12 @@ function processSensorRow(row, realtime = true) {
     setElAnimate('iot-power',   power.toFixed(1));
     const temperature = Number(row.temperature);
     const humidity = Number(row.humidity);
-    setElAnimate('iot-temp', row.temperature != null && Number.isFinite(temperature) ? temperature.toFixed(1) : '--');
-    setElAnimate('iot-humid', row.humidity != null && Number.isFinite(humidity) ? humidity.toFixed(1) : '--');
+    if (row.temperature != null && Number.isFinite(temperature)) {
+        setElAnimate('iot-temp', temperature.toFixed(1));
+    }
+    if (row.humidity != null && Number.isFinite(humidity)) {
+        setElAnimate('iot-humid', humidity.toFixed(1));
+    }
 
     // LDR
     const maxLdr = 4095;
